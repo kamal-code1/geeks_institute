@@ -1,0 +1,27 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  margin: 20px auto;
+  gap: 5px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background: #e0e0e0;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#restart {
+  display: none;
+  margin-top: 20px;
+}
