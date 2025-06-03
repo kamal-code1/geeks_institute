@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exercise 2 - Delete Colors</title>
+</head>
+<body>
+
+<form>
+    
+<label for="musicGenres">Select a kind of Music:</label>
+<select id="musicGenres" name="genres">
+  <option value="rock">Rock</option>
+  <option value="blues" selected>Blues</option>
+  <option value="classic">Classic</option>
+</select>
+
+  <input type="button" value="Select and Remove" id="removeBtn" />
+</form>
+
+<script>
+  const colorSelect = document.getElementById('colorSelect');
+  const removeBtn = document.getElementById('removeBtn');
+
+  removeBtn.addEventListener('click', removecolor);
+
+  function removecolor() {
+    const selectedIndex = colorSelect.selectedIndex;
+    if (selectedIndex !== -1) {
+      colorSelect.remove(selectedIndex);
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 2 - Work with forms</title>
+</head>
+<body>
+
+  <form id="userForm">
+    <label for="fname">First name:</label><br />
+    <input type="text" id="fname" name="firstname" /><br />
+    <label for="lname">Last name:</label><br />
+    <input type="text" id="lname" name="lastname" /><br /><br />
+    <input type="submit" value="Submit" id="submit" />
+  </form> 
+
+  <ul class="usersAnswer"></ul>
+
+  <script>
+    const form = document.querySelector('form');
+    console.log(form);
+
+    const inputFnameById = document.getElementById('fname');
+    const inputLnameById = document.getElementById('lname');
+    console.log(inputFnameById, inputLnameById);
+
+    const inputFnameByName = document.querySelector('input[name="firstname"]');
+    const inputLnameByName = document.querySelector('input[name="lastname"]');
+    console.log(inputFnameByName, inputLnameByName);
+
+    const ul = document.querySelector('.usersAnswer');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const firstName = inputFnameById.value.trim();
+      const lastName = inputLnameById.value.trim();
+
+      if (firstName === '' || lastName === '') {
+        alert('Please fill in both first name and last name.');
+        return;
+      }
+
+      const liFirstName = document.createElement('li');
+      liFirstName.textContent = firstName;
+      const liLastName = document.createElement('li');
+      liLastName.textContent = lastName;
+
+      ul.appendChild(liFirstName);
+      ul.appendChild(liLastName);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
