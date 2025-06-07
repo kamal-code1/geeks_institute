@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sunrise Time Finder</title>
+</head>
+<body>
+  <h2>Sunrise Time Finder</h2>
+  <form id="sunriseForm">
+    <fieldset>
+      <legend>City 1</legend>
+      <label>
+        Latitude:
+        <input type="number" step="any" id="lat1" required value="48.864716" />
+      </label>
+      <br />
+      <label>
+        Longitude:
+        <input type="number" step="any" id="lng1" required value="2.349014" />
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>City 2</legend>
+      <label>
+        Latitude:
+        <input type="number" step="any" id="lat2" required value="40.730610" />
+      </label>
+      <br />
+      <label>
+        Longitude:
+        <input type="number" step="any" id="lng2" required value="-73.935242" />
+      </label>
+    </fieldset>
+
+    <button type="submit">Get Sunrise Times</button>
+  </form>
+
+  <h3>Results:</h3>
+  <div id="results"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
