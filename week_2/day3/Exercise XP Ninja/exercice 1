@@ -1,0 +1,26 @@
+SELECT f.film_id, f.title, f.rating
+FROM film f
+LEFT JOIN inventory i ON f.film_id = i.film_id
+LEFT JOIN rental r ON i.inventory_id = r.inventory_id AND r.return_date IS NULL
+WHERE f.rating IN ('G', 'PG')
+GROUP BY f.film_id, f.title, f.rating
+HAVING COUNT(r.rental_id) = 0;
+
+CREATE TABLE waiting_list (
+    waiting_id INT AUTO_INCREMENT PRIMARY KEY,
+    film_id INT NOT NULL,
+    child_name VARCHAR(100) NOT NULL,
+    request_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (film_id) REFERENCES film(film_id)
+);
+
+SELECT f.film_id, f.title, COUNT(w.waiting_id) AS waiting_count
+FROM film f
+LEFT JOIN waiting_list w ON f.film_id = w.film_id
+GROUP BY f.film_id, f.title
+ORDER BY waiting_count DESC;
+
+INSERT INTO waiting_list (film_id, child_name) VALUES
+(1, 'Alice'),
+(1, 'Bob'),
+(3, 'Charlie');
