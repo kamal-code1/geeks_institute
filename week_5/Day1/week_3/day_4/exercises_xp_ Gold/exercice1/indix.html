@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercise 1 - Select Music Genre</title>
+</head>
+<body>
+
+ <label for="genres">Select a music genre:</label>
+<select id="genres" name="genres">
+  <option value="rock">Rock</option>
+  <option value="blues" selected>Blues</option>
+</select>
+
+
+  <script>
+    const select = document.getElementById('genres');
+
+  
+    console.log(select.value);
+
+    const optionClassic = document.createElement('option');
+    optionClassic.value = 'classic';
+    optionClassic.textContent = 'Classic';
+    select.appendChild(optionClassic);
+
+
+    select.value = 'classic';
+
+
+    console.log(select.value);
+  </script>
+
+</body>
+</html>

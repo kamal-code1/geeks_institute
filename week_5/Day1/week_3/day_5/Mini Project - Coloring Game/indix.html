@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coloring Squares Game</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  h1 {
+    margin-bottom: 10px;
+  }
+  #colorPalette {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .color-swatch {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #333;
+    cursor: pointer;
+  }
+  .color-swatch.selected {
+    border: 4px solid black;
+  }
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(20, 25px);
+    grid-template-rows: repeat(20, 25px);
+    gap: 2px;
+  }
+  .square {
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Coloring Squares</h1>
+
+<div id="colorPalette">
+  <div class="color-swatch" style="background-color: red;" data-color="red"></div>
+  <div class="color-swatch" style="background-color: orange;" data-color="orange"></div>
+  <div class="color-swatch" style="background-color: yellow;" data-color="yellow"></div>
+  <div class="color-swatch" style="background-color: green;" data-color="green"></div>
+  <div class="color-swatch" style="background-color: blue;" data-color="blue"></div>
+  <div class="color-swatch" style="background-color: purple;" data-color="purple"></div>
+  <div class="color-swatch" style="background-color: black;" data-color="black"></div>
+  <div class="color-swatch" style="background-color: white; border: 2px solid black;" data-color="white"></div>
+</div>
+
+<div id="grid"></div>
+
+<script>
+  const palette = document.getElementById('colorPalette');
+  const grid = document.getElementById('grid');
+  let currentColor = 'black';
+  let isDrawing = false;
+
+  const gridSize = 20;
+  for (let i = 0; i < gridSize * gridSize; i++) {
+    const square = document.createElement('div');
+    square.classList.add('square');
+    grid.appendChild(square);
+  }
+
+  palette.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('color-swatch')) return;
+
+    document.querySelectorAll('.color-swatch').forEach(swatch => swatch.classList.remove('selected'));
+
+    currentColor = e.target.dataset.color;
+    e.target.classList.add('selected');
+  });
+
+  document.querySelector(`.color-swatch[data-color="${currentColor}"]`).classList.add('selected');
+
+  grid.addEventListener('mousedown', (e) => {
+    if (!e.target.classList.contains('square')) return;
+    isDrawing = true;
+    e.target.style.backgroundColor = currentColor;
+  });
+
+  grid.addEventListener('mouseover', (e) => {
+    if (isDrawing && e.target.classList.contains('square')) {
+      e.target.style.backgroundColor = currentColor;
+    }
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDrawing = false;
+  });
+
+  grid.addEventListener('dragstart', (e) => e.preventDefault());
+</script>
+
+</body>
+</html>

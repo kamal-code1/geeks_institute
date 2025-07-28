@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giphy Random GIFs</title>
+    <style>
+        body {
+            background: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .gif-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .gif-wrapper {
+            position: relative;
+            display: inline-block;
+            border: 2px solid white;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+        .gif-wrapper img {
+            display: block;
+            max-width: 200px;
+            height: auto;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,0,0,0.8);
+            border: none;
+            color: white;
+            padding: 4px 7px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        #deleteAllBtn {
+            background: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="gifForm">
+        <input type="text" id="categoryInput" placeholder="Enter a category (ex: sun)" required />
+        <button type="submit">Fetch GIF</button>
+    </form>
+    <button id="deleteAllBtn">DELETE ALL GIFs</button>
+    <div class="gif-container" id="gifContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge: Mad Libs</title>
+</head>
+<body>
+
+  <h1>Mad Libs</h1>
+
+  <form id="libform">
+    <label for="noun">Noun:</label><input type="text" id="noun"><br>
+    <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+    <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+    <label for="verb">Verb:</label><input type="text" id="verb"><br>
+    <label for="place">A place:</label><input type="text" id="place"><br>
+    <button type="submit" id="lib-button">Lib it!</button>
+  </form>
+
+  <button id="shuffle-button" style="margin-top:10px;">Shuffle Story</button>
+
+  <p>Generated story: 
+    <span id="story"></span>
+  </p>
+
+<script>
+  const form = document.getElementById('libform');
+  const storySpan = document.getElementById('story');
+  const shuffleBtn = document.getElementById('shuffle-button');
+
+  let currentInputs = {};
+  let stories = [];
+
+  stories = [
+    ({noun, adjective, person, verb, place}) => 
+      `${person} saw a ${adjective} ${noun} while they were ${verb} at the ${place}.`,
+
+    ({noun, adjective, person, verb, place}) =>
+      `In the ${place}, ${person} decided to ${verb} the ${adjective} ${noun}.`,
+
+    ({noun, adjective, person, verb, place}) =>
+      `Once upon a time, ${person} wanted to ${verb} a ${adjective} ${noun} near the ${place}.`
+  ];
+
+  function validateInputs(inputs) {
+    return Object.values(inputs).every(value => value.trim() !== '');
+  }
+
+  function generateStory(inputs) {
+    const randomIndex = Math.floor(Math.random() * stories.length);
+    return stories[randomIndex](inputs);
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    currentInputs = {
+      noun: document.getElementById('noun').value,
+      adjective: document.getElementById('adjective').value,
+      person: document.getElementById('person').value,
+      verb: document.getElementById('verb').value,
+      place: document.getElementById('place').value
+    };
+
+    if (!validateInputs(currentInputs)) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    const story = generateStory(currentInputs);
+    storySpan.textContent = story;
+  });
+
+  shuffleBtn.addEventListener('click', () => {
+    if (Object.keys(currentInputs).length === 0 || !validateInputs(currentInputs)) {
+      alert('Please fill in all fields and generate a story first.');
+      return;
+    }
+
+    const story = generateStory(currentInputs);
+    storySpan.textContent = story;
+  });
+</script>
+
+</body>
+</html>
